@@ -1,0 +1,58 @@
+// File: android/app/build.gradle
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'  // This line ensures Firebase is integrated.
+}
+
+android {
+    namespace = "com.example.triveni"
+    compileSdk = 34
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.triveni"  // Your app's unique ID
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    // Firebase BoM (Bill of Materials) to manage Firebase dependencies versions automatically
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+
+    // Add Firebase products - Analytics in this case, but you can add more
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // TODO: Add other Firebase dependencies you need (e.g., Firestore, Firebase Authentication)
+    // implementation 'com.google.firebase:firebase-auth'  // Example for Firebase Authentication
+
+    // Flutter dependencies (auto-managed)
+    implementation 'com.google.android.material:material:1.6.1'  // Material design components
+}
+
+flutter {
+    source = "../.."
+}
+
